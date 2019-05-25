@@ -14,7 +14,7 @@
   $uusername = $_GET["username"];
   $upassword = $_GET["password"];
   //echo($num);
-  if($num>0){
+  if($num>0 && $uusername != "" && $upassword != ""){
 
     // users array
     $users_arr=array();

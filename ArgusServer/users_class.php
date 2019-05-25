@@ -35,7 +35,7 @@
 
     function register($rusername, $rpassword) {
       $query = "INSERT INTO $this->table (username, password) VALUES('$rusername', '$rpassword')";
-      echo($query);
+      //echo($query);
       $isItDone = False;
       try{
         $stmt = $this->conn->prepare($query);

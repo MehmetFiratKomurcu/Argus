@@ -8,8 +8,21 @@
   $db = $database->getConnection();
 
   $Advertisements = new ArgusAdvertisements($db);
-
-  $stmt = $Advertisements->read();
+  $pCategory = $_GET["Category"];
+  $pCompanyName = $_GET["CompanyName"];
+  //echo($pcategory." ".$pCompanyName);
+  if(isset($pCategory) && isset($pCompanyName) && $pCategory != "" && $pCompanyName != "") {
+    //echo("burdayim bothta");
+    $stmt = $Advertisements->readWithBoth($pCompanyName, $pCategory);
+  }else if(isset($pCompanyName) && $pCompanyName != "") {
+    //echo("companynamedeyim");
+    $stmt = $Advertisements->readWithCompanyName($pCompanyName);
+  }else if(isset($pCategory) && $pCategory != ""){
+    //echo("categorydeyim");
+    $stmt = $Advertisements->readWithCategory($pCategory);
+  }else{
+    $stmt = $Advertisements->read();
+  }
   $num = $stmt->rowCount();
   //echo($num);
   if($num>0){
@@ -24,7 +37,8 @@
             "CompanyName" => $CompanyName,
             "CompanyLocation" => $CompanyLocation,
             "CampaignContext" => $CampaignContext,
-            "CampaignDeadline" => $CampaignDeadline
+            "CampaignDeadline" => $CampaignDeadline,
+            "Category" => $Category
         );
 
         array_push($advertisements_arr["records"], $advertisements_item);        

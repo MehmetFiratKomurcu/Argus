@@ -25,7 +25,7 @@
   </div>
   </nav>
   <div class="container text-primary" style="height: 100px; margin-top: 30px" >
-    <form action="news_insert.php" class="was-validated" method="post" enctype="multipart/form-data">
+    <form action="insert-adv.php" class="was-validated" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="title">Company Name:</label>
         <input type="text" class="form-control" id="CompanyName" placeholder="Enter Your Company Name." name="CompanyName" required>
@@ -35,6 +35,12 @@
       <div class="form-group">
         <label for="title">Company Location:</label>
         <input type="text" class="form-control" id="Location" placeholder="Enter a Location." name="Location" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <div class="form-group">
+        <label for="Context">Campaign Context:</label>
+        <input type="text" class="form-control" id="Context" placeholder="Enter the context." name="Context" required>
         <div class="valid-feedback">Valid.</div>
         <div class="invalid-feedback">Please fill out this field.</div>
       </div>
@@ -63,7 +69,7 @@
  <div class="container-fluid">
   <div class="row">
    <div class="col-md-6 col-sm-6 col-xs-12">
-    <form method="post">
+    <!-- <form method="post"> -->
      <div class="form-group ">
       <label class="control-label " for="date">
        Date
@@ -73,14 +79,14 @@
         <i class="fa fa-calendar-check-o">
         </i>
        </div>
-       <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" required/>
+       <input class="form-control" id="date" name="date" placeholder="YYYY-MM-DD" type="text" required/>
       </div>
      </div>
      <div class="form-group">
       <div>
       </div>
      </div>
-    </form>
+    <!--</form> -->
    </div>
   </div>
  </div>
@@ -103,7 +109,7 @@
       var date_input=$('input[name="date"]'); //our date input has the name "date"
       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options={
-        format: 'mm/dd/yyyy',
+        format: 'yyyy-mm-dd',
         container: container,
         todayHighlight: true,
         autoclose: true,
@@ -111,9 +117,6 @@
       date_input.datepicker(options);
     })
 </script>
-
-
-
 
 
       <button type="submit" class="btn btn-primary">Submit</button>

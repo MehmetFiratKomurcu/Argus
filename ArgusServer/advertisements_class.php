@@ -13,6 +13,31 @@
       $this->conn = $db;
     }
 
+    function readWithBoth($pCompanyName, $pCategory) {
+      $query = "SELECT * FROM Advertisements WHERE CompanyName = '$pCompanyName' and Category = '$pCategory'";
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+
+      return $stmt;
+    }
+
+    function readWithCompanyName($pCompanyName) {
+      $query = "SELECT * FROM Advertisements WHERE CompanyName = '$pCompanyName'";
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+
+      return $stmt;
+    }
+
+    function readWithCategory($pCategory) {
+      $query = "SELECT * FROM Advertisements WHERE Category = '$pCategory'";
+      $stmt = $this->conn->prepare($query);
+      //echo($query."df");
+      $stmt->execute();
+      //echo($query);
+      return $stmt;
+    }
+
     function read(){
 
       // select all query
@@ -23,32 +48,14 @@
       return $stmt;
     }
 
-    function changePass($username, $new_pass){
-      $query = "UPDATE " . $this->table . " SET password = '$new_pass' WHERE username =  '$username'";
-      //echo($query);
-      $isItDone = False;
-      try{
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $isItDone = True;
-      }catch(Exception $e) {
-        $isItDone = False;
-      }
-      return $isItDone;
-    }
-
-    function register($rusername, $rpassword) {
-      $query = "INSERT INTO $this->table (username, password) VALUES('$rusername', '$rpassword')";
+    function insertCampaign($pCompanyName, $pLocation, $pContext, $date, $pCampaign_Type) {
+      $query = "INSERT INTO Advertisements (CompanyName, CompanyLocation, CampaignContext, CampaignDeadline, Category)
+      VALUES ('$pCompanyName', '$pLocation', '$pContext', '$date', '$pCampaign_Type')";
       echo($query);
-      $isItDone = False;
-      try{
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $isItDone = True;
-      }catch(Exception $e) {
-        $isItDone = False;
-      }
-      return $isItDone;
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+
+      return $stmt;
     }
   }
  ?>

@@ -12,22 +12,35 @@
     $upassword = $_GET["password"];
     $users_arr=array();
     $users_arr["records"]=array();
-    $resp = $users->register($uusername, $upassword);
+    if($uusername != "" && $upassword != "") {
+        $resp = $users->register($uusername, $upassword);
 
-    if($resp) {
+        if($resp) {
         $users_item=array(
             "Status" => "True" 
         );
         array_push($users_arr["records"], $users_item);
-    }else {
+        }else {
         $users_item=array(
             "Status" => "False" 
         );
         array_push($users_arr["records"], $users_item);
-    }
+        }
         // set response code - 200 OK
         http_response_code(200);
 
         // show products data in json format
         echo json_encode($users_arr);
+    }else {
+        $users_item=array(
+            "Status" => "False" 
+        );
+        array_push($users_arr["records"], $users_item);
+        // set response code - 200 OK
+        http_response_code(200);
+
+        // show products data in json format
+        echo json_encode($users_arr);
+    }
+    
 ?> 
