@@ -14,6 +14,7 @@ $pLocation = $_POST["Location"];
 $pCampaign_Type = $_POST["Campaign_Type"];
 $pdate = $_POST["date"];
 $pContext = $_POST["Context"];
+
 //echo("$pCompanyName + $pCampaign_Type + $pLocation + $pdate");
 /*
 $pCompanyName = $connection->real_escape_string($pCompanyName);
@@ -22,6 +23,21 @@ $pCampaign_Type = $connection->real_escape_string($pCampaign_Type);
 $pdate = $connection->real_escape_string($pdate);
 $pContext = $connection->real_escape_string($pContext);
 */
-$stmt = $Advertisements->insertCampaign($pCompanyName, $pLocation, $pContext, $pdate, $pCampaign_Type);
+
+$findme   = ',';
+$pos = strpos($pLocation, $findme);
+if($pos === false) {
+    echo "The string '$findme' was not found in the string '$mystring'";
+}else {
+    $pieces = explode(",", $pLocation);
+    if(is_numeric($pieces[0]) && is_numeric($pieces[1])) {
+        $stmt = $Advertisements->insertCampaign($pCompanyName, $pLocation, $pContext, $pdate, $pCampaign_Type);
+    } else {
+        echo "Location is not valid.";
+    }
+}
+
+
+
 
 ?>

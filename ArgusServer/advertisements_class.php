@@ -14,7 +14,8 @@
     }
 
     function readWithBoth($pCompanyName, $pCategory) {
-      $query = "SELECT * FROM Advertisements WHERE CompanyName = '$pCompanyName' and Category = '$pCategory'";
+      $pCompanyName = strtolower($pCompanyName);
+      $query = "SELECT * FROM Advertisements WHERE CompanyName LIKE '{%$pCompanyName%}' and Category = '$pCategory'";
       $stmt = $this->conn->prepare($query);
       $stmt->execute();
 
@@ -22,7 +23,8 @@
     }
 
     function readWithCompanyName($pCompanyName) {
-      $query = "SELECT * FROM Advertisements WHERE CompanyName = '$pCompanyName'";
+      $pCompanyName = strtolower($pCompanyName);
+      $query = "SELECT * FROM Advertisements WHERE CompanyName LIKE '%{$pCompanyName}%'";
       $stmt = $this->conn->prepare($query);
       $stmt->execute();
 
@@ -49,6 +51,7 @@
     }
 
     function insertCampaign($pCompanyName, $pLocation, $pContext, $date, $pCampaign_Type) {
+      $pCompanyName = strtolower($pCompanyName);
       $query = "INSERT INTO Advertisements (CompanyName, CompanyLocation, CampaignContext, CampaignDeadline, Category)
       VALUES ('$pCompanyName', '$pLocation', '$pContext', '$date', '$pCampaign_Type')";
       echo($query);
